@@ -10,6 +10,7 @@ import Friends from "./views/Friends";
 import NewPost from "./views/NewPost";
 import Chat from "./views/Chat";
 import Settings from "./views/Settings";
+import { AccountBox } from "./views/login";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -19,9 +20,9 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    children: [
+      children: [
       {
-        path: "/",
+        path: "/home",
         element: <Home />,
       },
       {
@@ -41,7 +42,10 @@ const router = createBrowserRouter([
         element: <Settings />,
       },
     ],
-  },
+  },{
+    path: "/login",
+    element: <AccountBox />,
+  }
 ]);
 
 root.render(
