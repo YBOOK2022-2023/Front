@@ -1,13 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { AccountBox } from './views/login';
 
+import "./App.css";
+import { Outlet } from "react-router-dom";
+import AppBarCustom from "./components/AppBarCustom";
+import SearchBarCustom from "./components/Search/SearchBarCustom";
+import { outerTheme } from "./themes/Theme";
 
 function App() {
   return (
-    <div className="App">
-      <AccountBox/>
+    <div
+      className='App'
+      style={{ backgroundColor: outerTheme.palette.primary.main }}
+    >
+      <SearchBarCustom />
+      <Outlet />
+      <AppBarCustom />
     </div>
   );
 }
