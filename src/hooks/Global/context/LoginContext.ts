@@ -1,6 +1,6 @@
 import React from "react";
 import { createContext,useContext } from "react";
-import { LoginForm } from "../../../components/login/Login";
+import { LoginForm } from "../../../views/login/Login";
 
 type AccountContextType = {
     switchToLogin: () => void;

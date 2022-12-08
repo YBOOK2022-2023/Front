@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { AccountBox } from './components/login';
+import { AccountBox } from './views/login';
 
 
 function App() {
