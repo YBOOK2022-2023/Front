@@ -28,7 +28,7 @@ export const FormContainer = styled.form`
   margin-top: 10em;
   display: flex;
   flex-direction: column;
-  box-shadow: 0px 0px 2.5px rgba(15, 15, 15, 0.19);
+  /* box-shadow: 0px 0px 2.5px rgba(15, 15, 15, 0.19); */
 `;
 
 
@@ -85,3 +85,7 @@ export const SubmitButton = styled.button`
         filter: brightness(1.03);
     }
 `;
+export const SpanAlert =styled.span`
+color: red;
+font-size: 12px;
+`

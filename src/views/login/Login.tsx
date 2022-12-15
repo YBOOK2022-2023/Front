@@ -23,7 +23,7 @@ export function LoginForm(props:any) {
       </FormContainer>
 
       <MutedLink className="my-2" href="#">Mot de passe oublié?</MutedLink>
-    
+        
       <SubmitButton type="submit">Connexion</SubmitButton>
       <MutedLink className="my-2" href="#">
         Pas de compte ?{" "}

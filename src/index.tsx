@@ -11,6 +11,8 @@ import NewPost from "./views/NewPost";
 import Chat from "./views/Chat";
 import Settings from "./views/Settings";
 import { AccountBox } from "./views/login";
+import Signup from "./views/Signup";
+import CognitoLogin from "./views/CognitoLogin";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -45,6 +47,12 @@ const router = createBrowserRouter([
   },{
     path: "/login",
     element: <AccountBox />,
+  },{
+    path: "/cognitoRegister",
+    element: <Signup />,
+  },{
+    path:"/cognitoLogin",
+    element: <CognitoLogin/>,
   }
 ]);
 

@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import AppBarCustom from "./components/AppBarCustom";
 import SearchBarCustom from "./components/Search/SearchBarCustom";
 import { outerTheme } from "./themes/Theme";
+import CognitoLogin from "./views/CognitoLogin";
 
 function App() {
   return (
@@ -11,9 +12,11 @@ function App() {
       className='App'
       style={{ backgroundColor: outerTheme.palette.primary.main }}
     >
-      <SearchBarCustom />
+     <SearchBarCustom />
       <Outlet />
-      <AppBarCustom />
+      <AppBarCustom /> 
+      
+    
     </div>
   );
 }
