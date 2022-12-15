@@ -5,6 +5,7 @@ import styled from "styled-components"
 import { LoginForm } from "./Login";
 import { RegisterForm } from "./Register";
 import { AccountContext } from "../../hooks/Global/context/LoginContext";
+import { UserAccountProvider } from "../../hooks/Global/context/UserAccount";
 const BoxContainer = styled.div`
     
     width: 100vw;
@@ -122,32 +123,34 @@ export function AccountBox(props:any){
     const contextValue = { switchToRegister, switchToLogin };
 
     return(
-      <AccountContext.Provider value={contextValue}>
-        <BoxContainer>
-            <TopContainer>
-                <BackDrop 
-                initial={false} 
-                animate={isExpanded ? "expanded" :"collapsed"}
-                variants={backdropVariants}
-                transition={expandingTransition}
-                />
-               {active=== "login" && <HeaderContainer>
-                    <HeaderText>Bienvenue</HeaderText>
-                    <SmallText>Veuillez vous identifier </SmallText>
-                    <SmallText>pour continuer !</SmallText>
-                </HeaderContainer>} 
+      <UserAccountProvider>
+        <AccountContext.Provider value={contextValue}>
+          <BoxContainer>
+              <TopContainer>
+                  <BackDrop 
+                  initial={false} 
+                  animate={isExpanded ? "expanded" :"collapsed"}
+                  variants={backdropVariants}
+                  transition={expandingTransition}
+                  />
+                {active=== "login" && <HeaderContainer>
+                      <HeaderText>Bienvenue</HeaderText>
+                      <SmallText>Veuillez vous identifier </SmallText>
+                      <SmallText>pour continuer !</SmallText>
+                  </HeaderContainer>} 
 
-                {active=== "register" && <HeaderContainer>
-                <HeaderText>Première Visite ?</HeaderText>
-                    <SmallText>Veuillez vous enregistrer</SmallText>
-                    <SmallText>pour continuer !</SmallText>
-                </HeaderContainer>}
-            </TopContainer>
-            <InnerContainer>
-                {active === "login" && <LoginForm/>}
-                {active === "register" && <RegisterForm/>} 
-            </InnerContainer>
-        </BoxContainer>
-      </AccountContext.Provider>
+                  {active=== "register" && <HeaderContainer>
+                  <HeaderText>Première Visite ?</HeaderText>
+                      <SmallText>Veuillez vous enregistrer</SmallText>
+                      <SmallText>pour continuer !</SmallText>
+                  </HeaderContainer>}
+              </TopContainer>
+              <InnerContainer>
+                  {active === "login" && <LoginForm/>}
+                  {active === "register" && <RegisterForm/>} 
+              </InnerContainer>
+          </BoxContainer>
+        </AccountContext.Provider>
+      </UserAccountProvider>
     )
 }
