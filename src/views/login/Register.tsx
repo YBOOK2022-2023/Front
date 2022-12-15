@@ -140,7 +140,7 @@ export function RegisterForm(props:any) {
 
             <Input type="text"  placeholder="Nom"
             {...register("name")}
-            /* onChange={(e)=>setName(e.target.value)} */ />
+             />
             <Input type="text"  placeholder="Prénom"
             {...register("given_name")}
             //value={given_name}

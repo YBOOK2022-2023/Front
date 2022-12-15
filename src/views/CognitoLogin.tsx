@@ -23,7 +23,7 @@ const CognitoLogin = () => {
 console.log('user:',authDetails);
         user.authenticateUser(authDetails,{
             onSuccess:(data)=>{
-                console.log('onSuccess:',data);
+                console.log('User logged in !!! onSuccess:',data);
             },
             onFailure:(err)=>{
                 console.error('onFailure:',err);
