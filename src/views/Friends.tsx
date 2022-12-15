@@ -1,7 +1,9 @@
+import SectionTitle from "../components/SectionTitle";
+
 function Friends() {
   return (
     <div id='friends'>
-      <h1>friends</h1>
+      <SectionTitle text='Amis' />
     </div>
   );
 }

@@ -1,6 +1,5 @@
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
-import { outerTheme } from "../../themes/Theme";
 
 export const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -25,7 +24,6 @@ export const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  color: outerTheme.palette.secondary.main,
 }));
 
 export const StyledInputBase = styled(InputBase)(({ theme }) => ({

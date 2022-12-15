@@ -7,11 +7,9 @@ import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./views/Home";
 import Friends from "./views/Friends";
-import NewPost from "./views/NewPost";
 import Chat from "./views/Chat";
 import Settings from "./views/Settings";
 import { AccountBox } from "./views/login";
-
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -21,7 +19,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-      children: [
+    children: [
       {
         path: "/home",
         element: <Home />,
@@ -31,10 +29,6 @@ const router = createBrowserRouter([
         element: <Friends />,
       },
       {
-        path: "new-post",
-        element: <NewPost />,
-      },
-      {
         path: "chat",
         element: <Chat />,
       },
@@ -42,8 +36,17 @@ const router = createBrowserRouter([
         path: "settings",
         element: <Settings />,
       },
+      {
+        path: "notifications",
+        element: <Notifications />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
+      },
     ],
-  },{
+  },
+  {
     path: "/login",
     element: <AccountBox />,
   },
