@@ -1,35 +1,75 @@
 import React,{createContext} from "react"
-import { CognitoUserPool,AuthenticationDetails, CognitoUser } from "amazon-cognito-identity-js"
+import { CognitoUserPool,AuthenticationDetails, CognitoUser, CognitoUserSession } from "amazon-cognito-identity-js"
 import {UserPool} from "../UserPool"
 import { resolve } from "path"
 
 type UserAccountContextType = {
-  authenticate(email: string, password: string): unknown
+  authenticate(email: string, password: string): Promise<{data:CognitoUserSession}>
+    getSession(): Promise<{session:CognitoUserSession}>
+    logout(): void
     
 }
 
 const UserAccountContext = createContext<UserAccountContextType>(null as any)
 
 
-const UserAccountProvider: React.FC<{children: React.ReactElement}> = (props) => {
-    
-    const authenticate =(Username:string,Password:string)=>{
-        const user = new CognitoUser({Username, Pool: UserPool})
-        const authDetails = new AuthenticationDetails({Username,Password})
-        user.authenticateUser(authDetails,{
-            onSuccess:(data)=>{
-                console.log("onSuccess:",data)
-            },
-            onFailure:(err)=>{
-                console.log("onFailure:",err)
-            },
-            newPasswordRequired:(data)=>{
-                console.log("newPasswordRequired:",data)
+const UserAccountProvider: React.FC<{children?: React.ReactElement|React.ReactElement[]}> = (props) => {
+    const getSession = async () => {
+        return await new Promise<{session:CognitoUserSession}>((resolve, reject) => {
+            const user = UserPool.getCurrentUser();
+            if (user) {
+                user.getSession((err:any, session:CognitoUserSession) => {
+                    if (err) {
+                        console.error(err);
+                        reject(err);
+                    
+                    } else {
+                       console.log("session" +session.isValid()) ;
+                        resolve({session});
+                    }
+                });
+            }else{
+                console.log("no user")
+                reject();
             }
-        });
+
+        })
     }
-    return <UserAccountContext.Provider value={{authenticate}}>{props.children}</UserAccountContext.Provider>;
+
+    const authenticate = async (Username:string,Password:string)=>{
+        return await new Promise<{data:CognitoUserSession}>((resolve,reject)=>{
+            const user = new CognitoUser({Username, Pool: UserPool})
+            const authDetails = new AuthenticationDetails({Username,Password})
+            user.authenticateUser(authDetails,{
+                onSuccess:(data)=>{
+                    const accessToken = data.getAccessToken().getJwtToken()
+                    console.log("Connexion reussie ! accessToken:",accessToken)
+                    resolve({data})
+                },
+                onFailure:(err)=>{
+                    console.log("onFailure:",err)
+                    reject(err)
+                    
+                    
+                },
+                newPasswordRequired:(data)=>{
+                    console.log("newPasswordRequired:",data)
+                    resolve(data)
+                }
+            });
+        })
+    }
+    const logout = () => {
+        const user = UserPool.getCurrentUser();
+        if (user) {
+            user.signOut();
+            console.log("logout")
+        }
+    }
+    
+    return <UserAccountContext.Provider value={{authenticate,getSession,logout}}>{props.children}</UserAccountContext.Provider>;
 };
+
 
 export {UserAccountProvider,UserAccountContext}
 ;

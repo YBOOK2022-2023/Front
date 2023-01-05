@@ -1,7 +1,9 @@
+import SectionTitle from "../components/SectionTitle";
+
 function Chat() {
   return (
     <div id='chat'>
-      <h1>Chat</h1>
+      <SectionTitle text='Messages' />
     </div>
   );
 }

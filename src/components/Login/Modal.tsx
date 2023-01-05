@@ -6,8 +6,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-
-export default function ValidationCodeDialog({open,setOpen,sendVerif,code,setCode,resendCode}:{open:boolean,setOpen:React.Dispatch<React.SetStateAction<boolean>>,sendVerif:()=>void,code:string,setCode:React.Dispatch<React.SetStateAction<string>>,resendCode:()=>void}) {
+import MarkEmailReadIcon from '@mui/icons-material/MarkEmailRead';
+export default function ValidationCodeDialog({open,setOpen,sendVerif,code,setCode,resendCode,resendCodeText}:{open:boolean,setOpen:React.Dispatch<React.SetStateAction<boolean>>,sendVerif:()=>void,code:string,setCode:React.Dispatch<React.SetStateAction<string>>,resendCode:()=>void,resendCodeText:string}) {
   
 
   const handleClose = () => {
@@ -17,10 +17,10 @@ export default function ValidationCodeDialog({open,setOpen,sendVerif,code,setCod
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Subscribe</DialogTitle>
+        <DialogTitle><MarkEmailReadIcon></MarkEmailReadIcon>  &emsp;Vérification</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Veuillez en saisir le code de validation
+          Veuillez  saisir le code de validation <br /><small><i>*Le code de vérification est valable 24h </i></small>
           </DialogContentText>
           <TextField
             autoFocus
@@ -35,9 +35,10 @@ export default function ValidationCodeDialog({open,setOpen,sendVerif,code,setCod
           />
         </DialogContent>
         <DialogActions>
-          <Button variant="contained" onClick={resendCode}>Renvoyer Code</Button>
-          <Button variant="outlined" onClick={handleClose}>Fermer</Button>
+          <Button variant="contained" onClick={resendCode}>{resendCodeText}</Button>
+          
           <Button variant="contained" onClick={sendVerif}>Envoyer</Button>
+          <Button variant="outlined" onClick={handleClose}>Fermer</Button>
         </DialogActions>
       </Dialog>
     </div>

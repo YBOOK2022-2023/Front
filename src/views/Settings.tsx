@@ -1,7 +1,9 @@
+import SectionTitle from "../components/SectionTitle";
+
 function Settings() {
   return (
     <div id='settings'>
-      <h1>Settings</h1>
+      <SectionTitle text='Réglages' />
     </div>
   );
 }
