@@ -10,6 +10,8 @@ import Friends from "./views/Friends";
 import Chat from "./views/Chat";
 import Settings from "./views/Settings";
 import { AccountBox } from "./views/login";
+import Notifications from "./views/Notifications";
+import Profile from "./views/Profile";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

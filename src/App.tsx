@@ -1,11 +1,10 @@
 import "./App.css";
 import { Outlet } from "react-router-dom";
-import AppBarCustom from "./components/AppBarCustom";
-import SearchBarCustom from "./components/Search/SearchBarCustom";
-import { outerTheme } from "./themes/Theme";
+import AppBarCustom from "./components/AppBar/AppBarCustom";
+import TopBar from "./components/TopBar/TopBar";
 
 import { useEffect } from "react";
-import { Box, Button, IconButton, Paper, Slide } from "@mui/material";
+import { Box, IconButton, Paper, Slide } from "@mui/material";
 import { useRef, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import NewPost from "./components/NewPost";
@@ -16,10 +15,6 @@ function App() {
   useEffect(() => {
     console.log(process.env);
   }, []);
-
-  const handleChange = () => {
-    setChecked((prev) => !prev);
-  };
   return (
     <div
       className='App'
@@ -33,6 +28,7 @@ function App() {
           sx={{
             width: "100%",
             height: "100%",
+            top: 0,
             position: "absolute",
             zIndex: 6,
           }}
