@@ -57,8 +57,7 @@ export function LoginForm(props:any) {
     
     setEmail(data.email);
     setPassword(data.password);
-   
-      
+  
          authenticate(data.email,data.password)
           .then((data)=>{
             console.log("data:",data)

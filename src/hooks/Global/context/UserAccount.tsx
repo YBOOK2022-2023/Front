@@ -2,6 +2,7 @@ import React,{createContext} from "react"
 import { CognitoUserPool,AuthenticationDetails, CognitoUser, CognitoUserSession } from "amazon-cognito-identity-js"
 import {UserPool} from "../UserPool"
 import { resolve } from "path"
+import axios from "axios"
 
 type UserAccountContextType = {
   authenticate(email: string, password: string): Promise<{data:CognitoUserSession}>
@@ -26,6 +27,7 @@ const UserAccountProvider: React.FC<{children?: React.ReactElement|React.ReactEl
                     } else {
                        console.log("session" +session.isValid()) ;
                         resolve({session});
+                        return session;
                     }
                 });
             }else{
@@ -35,16 +37,36 @@ const UserAccountProvider: React.FC<{children?: React.ReactElement|React.ReactEl
 
         })
     }
+    async function postToken(route:string, token: string) {
+        try {
+          const response = await fetch(route, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({ token }),
+          });
+          const data = await response.json();
+          console.log(data);
+        } catch (error) {
+          console.error(error);
+        }
+      }
 
     const authenticate = async (Username:string,Password:string)=>{
         return await new Promise<{data:CognitoUserSession}>((resolve,reject)=>{
             const user = new CognitoUser({Username, Pool: UserPool})
             const authDetails = new AuthenticationDetails({Username,Password})
+            console.log(Username,Password);
             user.authenticateUser(authDetails,{
+                
                 onSuccess:(data)=>{
-                    const accessToken = data.getAccessToken().getJwtToken()
+                    const accessToken = data.getAccessToken().getJwtToken();
+                    const idToken = data.getIdToken().getJwtToken();
                     console.log("Connexion reussie ! accessToken:",accessToken)
                     resolve({data})
+                    return idToken;
                 },
                 onFailure:(err)=>{
                     console.log("onFailure:",err)
