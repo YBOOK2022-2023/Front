@@ -96,11 +96,11 @@ export function RegisterForm(props:any) {
           setPassword(data.password);
           console.log(name,given_name,email)
           setOpen(true);
-          const user_name=new CognitoUserAttribute({Name:"name",Value:name})
-          const user_given_name=new CognitoUserAttribute({Name:"given_name",Value:given_name})
-          const user_email=new CognitoUserAttribute({Name:"email",Value:email})
+          const user_name=new CognitoUserAttribute({Name:"name",Value:data.name})
+          const user_given_name=new CognitoUserAttribute({Name:"given_name",Value:data.given_name})
+          const user_email=new CognitoUserAttribute({Name:"email",Value:data.email})
           
-            UserPool.signUp(email, password, [user_name,user_given_name,user_email], [], (err, data) => {
+            UserPool.signUp(data.email ,data.password, [user_name,user_given_name,user_email], [], (err, data) => {
               if (err) console.error(err);
               console.log(data);
             });
