@@ -19,6 +19,7 @@ import { CognitoUser ,AuthenticationDetails} from "amazon-cognito-identity-js";
 import { UserPool } from "../../hooks/Global/UserPool";
 import { UserAccountProvider ,UserAccountContext} from "../../hooks/Global/context/UserAccount";
 import { render } from "@testing-library/react";
+import {useNavigate} from "react-router-dom"
 
 const schema = yup.object().shape({
   email: yup.string().email().required("Veuillez saisir un email"),
@@ -52,9 +53,9 @@ export function LoginForm(props:any) {
   //********/ hooks
   const {authenticate} = useContext(UserAccountContext);
   const {getSession} = useContext(UserAccountContext);
-  
+  const navigate = useNavigate();
   const onSubmit = (data:MyFieldsLogin) => { 
-    
+  
     setEmail(data.email);
     setPassword(data.password);
   
@@ -64,6 +65,8 @@ export function LoginForm(props:any) {
             setIsError(false);
             setErrorMessage("Connexion réussie");
             setOpenToast(true);
+            navigate("/home");
+            
           })
           .catch((error)=>{
             setIsError(true);
