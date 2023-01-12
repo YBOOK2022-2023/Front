@@ -3,19 +3,15 @@ import { Outlet } from "react-router-dom";
 import AppBarCustom from "./components/AppBar/AppBarCustom";
 import TopBar from "./components/TopBar/TopBar";
 
-import { useEffect } from "react";
 import { Box, IconButton, Paper, Slide } from "@mui/material";
 import { useRef, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import NewPost from "./components/NewPost";
-import { UserAccountProvider } from "./hooks/Global/context/UserAccount";
+import NewPost from "./components/PostAndComment/NewPost";
+import { UserAccountProvider } from "./providers/UserAccountContext";
 
 function App() {
   const [checked, setChecked] = useState(false);
   const containerRef = useRef(null);
-  /* useEffect(() => {
-    console.log(process.env);
-  }, []); */
   return (
     
     <div
