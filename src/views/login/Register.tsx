@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { AccountContext } from "../../hooks/Global/context/LoginContext";
+import { AccountContext } from "../../hooks/context/LoginContext";
 import HighlightOffTwoToneIcon from "@mui/icons-material/HighlightOffTwoTone";
 import ValidationCodeDialog from "../../components/Login/Modal";
 import {
@@ -18,8 +18,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import { configAxios } from "../../hooks/Global/context/configAxios";
-import { UserAccountContext } from "../../hooks/Global/context/UserAccount";
+import { configAxios } from "../../config/configAxios";
+import { UserAccountContext } from "../../providers/UserAccount";
 interface MyFields {
   name: string;
   given_name: string;
@@ -61,13 +61,13 @@ export function RegisterForm(props: any) {
 
   const { switchToLogin, switchToForgotPassword } = useContext(AccountContext);
   //***hooks
-  const {authenticate} = useContext(UserAccountContext);
-  const {getSession} = useContext(UserAccountContext);
+  const { authenticate } = useContext(UserAccountContext);
+  const { getSession } = useContext(UserAccountContext);
   const [isError, setisError] = useState(false);
   const [name] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [given_name] = React.useState("");
-  const [password,setPassword] = React.useState("");
+  const [password, setPassword] = React.useState("");
   const [open, setOpen] = React.useState(false);
   const [code, setCode] = React.useState("");
   const [openToast, setOpenToast] = React.useState(true);
@@ -113,7 +113,9 @@ export function RegisterForm(props: any) {
     const cognitoUser = new CognitoUser(userData);
     async function postDataRegister(data: any) {
       try {
-        const response = await configAxios.post('/user', undefined, {headers: {'Authorization': `Bearer ${data}`}});
+        const response = await configAxios.post("/user", undefined, {
+          headers: { Authorization: `Bearer ${data}` },
+        });
         console.log(response.data);
       } catch (error) {
         console.error(error);
@@ -122,15 +124,15 @@ export function RegisterForm(props: any) {
     cognitoUser.confirmRegistration(code, true, function (err, result) {
       if (result === "SUCCESS") {
         const toast_success = "Votre compte a été créé avec succès";
-       console.log("email:",email,"password:",password)
-        authenticate(email,password)
-          .then((data)=>{
-            console.log("reponse data:",data.data.getIdToken().getJwtToken())
+        console.log("email:", email, "password:", password);
+        authenticate(email, password)
+          .then((data) => {
+            console.log("reponse data:", data.data.getIdToken().getJwtToken());
             postDataRegister(data.data.getIdToken().getJwtToken());
           })
-          .catch((error)=>{
-            console.log("error:",error.message)
-          })
+          .catch((error) => {
+            console.log("error:", error.message);
+          });
         setisErrorMessage(toast_success);
         setOpenToast(true);
         setisError(false);
