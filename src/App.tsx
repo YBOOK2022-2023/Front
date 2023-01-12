@@ -12,6 +12,9 @@ import { UserAccountProvider } from "./providers/UserAccount";
 function App() {
   const [checked, setChecked] = useState(false);
   const containerRef = useRef(null);
+  /* useEffect(() => {
+    console.log(process.env);
+  }, []); */
   return (
     
     <div
@@ -22,31 +25,32 @@ function App() {
       ref={containerRef}
     >
       <UserAccountProvider>
-        <Slide direction='up' in={checked} container={containerRef.current}>
-          <Paper
-            sx={{
-              width: "100%",
-              height: "100%",
-              top: 0,
-              position: "absolute",
-              zIndex: 6,
-            }}
-            elevation={4}
+      <Slide direction='up' in={checked} container={containerRef.current}>
+        <Paper
+          sx={{
+            width: "100%",
+            height: "100%",
+            top: 0,
+            position: "absolute",
+            zIndex: 6,
+          }}
+          elevation={4}
+        >
+          <IconButton
+            onClick={() => setChecked(false)}
+            sx={{ position: "absolute", right: 0 }}
           >
-            <IconButton
-              onClick={() => setChecked(false)}
-              sx={{ position: "absolute", right: 0 }}
-            >
-              <CloseIcon />
-            </IconButton>
-            <NewPost />
-          </Paper>
-        </Slide>
-        <Box>
-          <TopBar />
-          <Outlet />
-          <AppBarCustom showNewPost={setChecked} />
-        </Box>
+            <CloseIcon />
+          </IconButton>
+          <NewPost />
+        </Paper>
+      </Slide>
+
+      <Box>
+        <TopBar />
+        <Outlet />
+        <AppBarCustom showNewPost={setChecked} />
+      </Box>
       </UserAccountProvider>
     </div>
   );
