@@ -8,7 +8,7 @@ export default interface User {
   suscribers: User[];
   posts: Post[];
   postsLiked: Post[];
-  postsCommented:Post[]
+  postsCommented: Post[];
   blocked: User[];
   blockedBy: User[];
   suscribersNum: number;
