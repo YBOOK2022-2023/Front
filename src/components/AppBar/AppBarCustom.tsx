@@ -25,7 +25,7 @@ function AppBarCustom(props: { showNewPost: (show: boolean) => void }) {
             textDecoration: "none",
           }}
         >
-          <IconButton color='inherit' component={Link} to='/'>
+          <IconButton color='inherit' component={Link} to='home'>
             <HomeIcon />
           </IconButton>
           <IconButton color='inherit' component={Link} to='chat'>

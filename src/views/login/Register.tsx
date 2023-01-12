@@ -111,6 +111,7 @@ export function RegisterForm(props: any) {
       Pool: UserPool,
     };
     const cognitoUser = new CognitoUser(userData);
+   
     async function postDataRegister(data: any) {
       try {
         const response = await configAxios.post('/user', undefined, {headers: {'Authorization': `Bearer ${data}`}});
@@ -119,6 +120,7 @@ export function RegisterForm(props: any) {
         console.error(error);
       }
     }
+    
     cognitoUser.confirmRegistration(code, true, function (err, result) {
       if (result === "SUCCESS") {
         const toast_success = "Votre compte a été créé avec succès";

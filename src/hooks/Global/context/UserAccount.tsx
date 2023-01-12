@@ -37,22 +37,7 @@ const UserAccountProvider: React.FC<{children?: React.ReactElement|React.ReactEl
 
         })
     }
-    async function postToken(route:string, token: string) {
-        try {
-          const response = await fetch(route, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`,
-            },
-            body: JSON.stringify({ token }),
-          });
-          const data = await response.json();
-          console.log(data);
-        } catch (error) {
-          console.error(error);
-        }
-      }
+   
 
     const authenticate = async (Username:string,Password:string)=>{
         return await new Promise<{data:CognitoUserSession}>((resolve,reject)=>{
@@ -81,6 +66,7 @@ const UserAccountProvider: React.FC<{children?: React.ReactElement|React.ReactEl
             });
         })
     }
+    
     const logout = () => {
         const user = UserPool.getCurrentUser();
         if (user) {

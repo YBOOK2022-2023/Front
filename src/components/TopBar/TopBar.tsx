@@ -3,6 +3,7 @@ import { Search, SearchIconWrapper, StyledInputBase } from "./SearchComponent";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 
 function TopBar() {
   return (
@@ -36,6 +37,7 @@ function TopBar() {
           </Search>
           <IconButton component={Link} to='notifications' color='inherit'>
             <NotificationsIcon />
+            <LogoutRoundedIcon/>
           </IconButton>
         </Toolbar>
       </AppBar>

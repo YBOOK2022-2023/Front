@@ -8,14 +8,16 @@ import { Box, IconButton, Paper, Slide } from "@mui/material";
 import { useRef, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import NewPost from "./components/NewPost";
+import { UserAccountProvider } from "./hooks/Global/context/UserAccount";
 
 function App() {
   const [checked, setChecked] = useState(false);
   const containerRef = useRef(null);
-  useEffect(() => {
+  /* useEffect(() => {
     console.log(process.env);
-  }, []);
+  }, []); */
   return (
+    
     <div
       className='App'
       style={{
@@ -23,6 +25,7 @@ function App() {
       }}
       ref={containerRef}
     >
+      <UserAccountProvider>
       <Slide direction='up' in={checked} container={containerRef.current}>
         <Paper
           sx={{
@@ -44,11 +47,12 @@ function App() {
         </Paper>
       </Slide>
 
-      <Box sx={{ pl: "1em" }}>
+      <Box>
         <TopBar />
         <Outlet />
         <AppBarCustom showNewPost={setChecked} />
       </Box>
+      </UserAccountProvider>
     </div>
   );
 }

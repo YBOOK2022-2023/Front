@@ -19,11 +19,10 @@ const root = ReactDOM.createRoot(
 
 const router = createBrowserRouter([
   {
-    path: "/",
     element: <App />,
     children: [
       {
-        path: "/home",
+        path: "home",
         element: <Home />,
       },
       {
@@ -49,14 +48,16 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/login",
+    path: "/",
     element: <AccountBox />,
   },
 ]);
 
 root.render(
   <React.StrictMode>
+   
     <RouterProvider router={router} />
+  
   </React.StrictMode>
 );
 

@@ -7,13 +7,17 @@ const Status=()=>{
     useEffect(()=>{
         getSession()
         .then((session)=>{
-            if(session)setIsLogged(true);
-            console.log("La session est " +session) ;
+            if(session){
+                setIsLogged(true);
+                console.log("session:" +session) ; 
+                  
+            }
+            
         });
     },[]);
     console.log("isLogged" +isLogged);
     return <div>
-        {isLogged? <Button variant="outlined" onClick={logout}>Logout</Button>:"Pas connecté"}
+        {isLogged?["Connecté",<Button variant="outlined" onClick={logout}>Logout</Button>] :"Pas connecté"}
         </div>;
 };
 export default Status;
