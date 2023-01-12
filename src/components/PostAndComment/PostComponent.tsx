@@ -18,7 +18,7 @@ import Comments from "./CommentsComponent";
 import { UserAccountContext } from "../../providers/UserAccount";
 import { configAxios } from "../../config/configAxios";
 
-export default function PostComponent(props: { post: Post ,canLike:boolean}) {
+export default function PostComponent(props: { post: Post; canLike: boolean }) {
   const styles = {
     media: {
       height: 0,
@@ -27,7 +27,7 @@ export default function PostComponent(props: { post: Post ,canLike:boolean}) {
     },
   };
 
-  const { post,canLike } = props;
+  const { post, canLike } = props;
 
   const currentUser = {
     firstname: "Cyril",
@@ -39,8 +39,8 @@ export default function PostComponent(props: { post: Post ,canLike:boolean}) {
     suscribers: [],
     posts: [],
     postsLiked: [],
-    postsCommented:[],
-    suscribersNum:1,
+    postsCommented: [],
+    suscribersNum: 1,
   };
 
   const [openComment, setOpenComment] = useState(false);
@@ -51,15 +51,15 @@ export default function PostComponent(props: { post: Post ,canLike:boolean}) {
 
   const [liked, setLiked] = useState<boolean | null>(null);
 
+  const { getJwt } = useContext(UserAccountContext);
+
   useEffect(() => {
-    liked
-      ? post.likes.push(currentUser)
-      : (post.likes = post.likes.filter(
-          (user) =>
-            user.firstname !== currentUser.firstname &&
-            user.lastname !== currentUser.lastname
-        ));
-  });
+    if (liked) {
+      likePost();
+    } else if (liked != null) {
+      unlikePost();
+    }
+  }, [liked]);
 
   const [expanded, setExpanded] = useState(false);
 
@@ -67,29 +67,27 @@ export default function PostComponent(props: { post: Post ,canLike:boolean}) {
     setExpanded(!expanded);
   };
 
-  const { getJwt } = useContext(UserAccountContext);
-  const UpdateLike = () => {
+  const likePost = () => {
     //Permet de mettre à jour le liker un post
-      getJwt().then((token) => {
-        configAxios
-          .put("/posts/" + post.id + "/like", {
-            headers: { Authorization: `Bearer ${token}` },
-          })
-          .then((result) => {
-          })
-    });
-  };
-  const getComments = () => {
     getJwt().then((token) => {
       configAxios
-        .get("/posts", {
+        .post(`/postlike/${post.id}`, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((result) => {
           console.log(result);
+        });
+    });
+  };
+
+  const unlikePost = () => {
+    getJwt().then((token) => {
+      configAxios
+        .delete(`/postlike/${post.id}`, {
+          headers: { Authorization: `Bearer ${token}` },
         })
-        .catch((err) => {
-          console.log(err);
+        .then((result) => {
+          console.log(result);
         });
     });
   };
@@ -107,7 +105,11 @@ export default function PostComponent(props: { post: Post ,canLike:boolean}) {
           </Avatar>
         }
         title={post.author.firstname + " " + post.author.lastname}
-        subheader={new Date(post.createdAt).toLocaleDateString('fr-FR',{year:'numeric',month:'long',day:'numeric'})}
+        subheader={new Date(post.createdAt).toLocaleDateString("fr-FR", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
       />
       <CardMedia
         style={styles.media}
@@ -119,12 +121,11 @@ export default function PostComponent(props: { post: Post ,canLike:boolean}) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        {canLike && (<>can like</>)}
-       <IconButton
+        {canLike && <>can like</>}
+        <IconButton
           aria-label='add to favorites'
           onClick={() => {
             setLiked(!liked);
-            //getComments();
           }}
         >
           <FavoriteIcon color={liked ? "primary" : "action"} />

@@ -12,8 +12,8 @@ import Settings from "./views/Settings";
 import { AccountBox } from "./views/login";
 import Notifications from "./views/Notifications";
 import Profile from "./views/Profile";
-import {useQueryClient,QueryClient,QueryClientProvider} from 'react-query'
-import {ReactQueryDevtools} from 'react-query/devtools'
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
@@ -55,18 +55,16 @@ const router = createBrowserRouter([
   {
     path: "/friends",
     element: <Friends />,
-  }
+  },
 ]);
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 root.render(
-  //<React.StrictMode>
-  
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-        <ReactQueryDevtools initialIsOpen={false} position='bottom-right' />     
-      </QueryClientProvider>
-  
- // </React.StrictMode>
+  <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+      <ReactQueryDevtools initialIsOpen={false} position='bottom-right' />
+    </QueryClientProvider>
+  </React.StrictMode>
 );
 
 // If you want your app to work offline and load faster, you can change

@@ -9,20 +9,18 @@ import User from "./UserModel";
 // }
 
 export default interface Post {
-
   id: number;
   createdAt: string;
   content: string;
   author: User;
-  likes: User[];
+  likes: [];
+  comment: Comment[] | null;
   attachments: [];
 }
-
 export interface Comment {
   author: User;
   content: string;
 }
-
 
 /* interface Attachment {
   id: number;

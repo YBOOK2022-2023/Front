@@ -112,10 +112,10 @@ const UserAccountProvider: React.FC<{
       }
     );
   };
-   const navigate = useNavigate();
+  const navigate = useNavigate();
   const logout = () => {
     const user = UserPool.getCurrentUser();
- 
+
     if (user) {
       user.signOut();
       console.log("logout");
