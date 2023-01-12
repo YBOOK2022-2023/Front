@@ -3,18 +3,14 @@ import { Outlet } from "react-router-dom";
 import AppBarCustom from "./components/AppBar/AppBarCustom";
 import TopBar from "./components/TopBar/TopBar";
 
-import { useEffect } from "react";
 import { Box, IconButton, Paper, Slide } from "@mui/material";
 import { useRef, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import NewPost from "./components/NewPost";
+import NewPost from "./components/PostAndComment/NewPost";
 
 function App() {
   const [checked, setChecked] = useState(false);
   const containerRef = useRef(null);
-  useEffect(() => {
-    console.log(process.env);
-  }, []);
   return (
     <div
       className='App'
@@ -44,7 +40,7 @@ function App() {
         </Paper>
       </Slide>
 
-      <Box sx={{ pl: "1em" }}>
+      <Box>
         <TopBar />
         <Outlet />
         <AppBarCustom showNewPost={setChecked} />
