@@ -10,11 +10,13 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Post from "../../models/PostModel";
 import CommentIcon from "@mui/icons-material/Comment";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CommentComponent from "./CommentComponent";
 import ViewComments from "./ViewCommentComponent";
 import { Collapse } from "@mui/material";
 import Comments from "./CommentsComponent";
+import { UserAccountContext } from "../../providers/UserAccount";
+import { configAxios } from "../../config/configAxios";
 
 export default function PostComponent(props: { post: Post }) {
   const styles = {
@@ -61,6 +63,23 @@ export default function PostComponent(props: { post: Post }) {
     setExpanded(!expanded);
   };
 
+  const { getJwt } = useContext(UserAccountContext);
+
+  const getComments = () => {
+    getJwt().then((token) => {
+      configAxios
+        .get("/posts", {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+  };
+
   return (
     <Card sx={{ mx: 2, my: 3 }}>
       <CardHeader
@@ -90,7 +109,10 @@ export default function PostComponent(props: { post: Post }) {
       <CardActions disableSpacing>
         <IconButton
           aria-label='add to favorites'
-          onClick={() => setLiked(!liked)}
+          onClick={() => {
+            setLiked(!liked);
+            getComments();
+          }}
         >
           <FavoriteIcon color={liked ? "primary" : "action"} />
         </IconButton>
