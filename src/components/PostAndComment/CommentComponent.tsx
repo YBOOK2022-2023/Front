@@ -21,11 +21,15 @@ function CommentComponent(props: {
   const currentUser = {
     firstname: "Cyril",
     lastname: "Cauquil",
+    email:"",
     blocked: [],
     blockedBy: [],
     suscribedTo: [],
     suscribers: [],
     posts: [],
+    postsLiked: [],
+    postsCommented:[],
+    suscribersNum:2,
   };
 
   const postComment = () => {

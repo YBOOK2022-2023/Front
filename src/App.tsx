@@ -2,7 +2,6 @@ import "./App.css";
 import { Outlet } from "react-router-dom";
 import AppBarCustom from "./components/AppBar/AppBarCustom";
 import TopBar from "./components/TopBar/TopBar";
-
 import { Box, IconButton, Paper, Slide } from "@mui/material";
 import { useRef, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";

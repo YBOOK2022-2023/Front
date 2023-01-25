@@ -6,38 +6,51 @@ function Home() {
   const users: User[] = [
     {
       firstname: "Cyril",
+      email:"",
       lastname: "Cauquil",
       blocked: [],
       blockedBy: [],
       suscribedTo: [],
       suscribers: [],
       posts: [],
+      postsLiked: [],
+      postsCommented:[],
+      suscribersNum:2,
     },
     {
       firstname: "Yanis",
       lastname: "Bevia",
+      email:"",
       blocked: [],
       blockedBy: [],
       suscribedTo: [],
       suscribers: [],
       posts: [],
+      postsLiked: [],
+      postsCommented:[],
+      suscribersNum:2,
     },
   ];
 
   const posts: Post[] = [
     {
       id: 0,
+      createdAt: "16 Janvier 2023 ",
       author: users[0],
       comment: [],
       content: "wallpaper",
       likes: [],
+  
+      attachments: [],
     },
     {
       id: 1,
+      createdAt: "20 Janvier 2023",
       author: users[1],
       comment: [],
       content: "wallpaper",
       likes: [],
+      attachments: [],
     },
   ];
 
@@ -48,7 +61,7 @@ function Home() {
     <div id='home-page' style={{ backgroundColor: "inherit", height: "100%" }}>
       {posts.map((post) => (
         <div>
-          <PostComponent key={post.id} post={post} />
+          <PostComponent key={post.id} post={post} canLike={true} />
         </div>
       ))}
     </div>

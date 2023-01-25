@@ -12,7 +12,8 @@ import Settings from "./views/Settings";
 import { AccountBox } from "./views/login";
 import Notifications from "./views/Notifications";
 import Profile from "./views/Profile";
-
+import {useQueryClient,QueryClient,QueryClientProvider} from 'react-query'
+import {ReactQueryDevtools} from 'react-query/devtools'
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
@@ -52,11 +53,14 @@ const router = createBrowserRouter([
     element: <AccountBox />,
   },
 ]);
-
+const queryClient = new QueryClient()
 root.render(
   <React.StrictMode>
-   
-    <RouterProvider router={router} />
+  
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <ReactQueryDevtools initialIsOpen={false} position='bottom-right' />     
+      </QueryClientProvider>
   
   </React.StrictMode>
 );

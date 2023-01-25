@@ -139,7 +139,6 @@ export function AccountBox(props: any) {
 
   return (
     <UserAccountProvider>
-      <Status />
       <AccountContext.Provider value={contextValue}>
         <BoxContainer>
           <TopContainer>

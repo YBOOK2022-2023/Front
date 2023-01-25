@@ -3,7 +3,8 @@ import Avatar from "@mui/material/Avatar";
 import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
 
-function InfoBar(){
+function InfoBar(props: { userName: string; numfriends: number; }) {
+  const { userName,numfriends } = props;
     const StyledBadge = styled(Badge)(({ theme }) => ({
         '& .MuiBadge-badge': {
           backgroundColor: '#44b700',
@@ -44,8 +45,11 @@ function InfoBar(){
         >
           <Avatar sx={{}} alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
     </StyledBadge>
-    
-    </Box>
+  
+    <div className="ml-4 mt-auto" ><b className="text-2xl">{userName}</b>
+    <p className="text-xs" >{numfriends} Friend(s)</p>
+    </div>
+    </Box> 
     )
 }
 export default InfoBar;
