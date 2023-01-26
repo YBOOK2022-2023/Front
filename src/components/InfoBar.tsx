@@ -2,8 +2,18 @@ import styled from "@emotion/styled";
 import Avatar from "@mui/material/Avatar";
 import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
+import Button from '@mui/material-next/Button';
+import { useNavigate } from "react-router-dom";
 
-function InfoBar(props: { userName: string; numfriends: number; }) {
+
+function InfoBar(props: { userName: string; numfriends?: number; }) {
+  const navigate = useNavigate();
+
+  const navigateToFriends = () => {
+    // 👇️ navigate to /contacts
+    navigate('/friends');
+  };
+
   const { userName,numfriends } = props;
     const StyledBadge = styled(Badge)(({ theme }) => ({
         '& .MuiBadge-badge': {
@@ -34,6 +44,7 @@ function InfoBar(props: { userName: string; numfriends: number; }) {
         },
       }));
     return (
+      <Box display="flex" mt="4rem" width="100%" >
         <Box display="flex" mt="4rem" width="100%" >
         <StyledBadge
           sx={{
@@ -49,7 +60,15 @@ function InfoBar(props: { userName: string; numfriends: number; }) {
     <div className="ml-4 mt-auto" ><b className="text-2xl">{userName}</b>
     <p className="text-xs" >{numfriends} Friend(s)</p>
     </div>
-    </Box> 
+    
+    <Button
+    onClick={navigateToFriends}
+  color="primary"
+  disabled={false}
+  variant="outlined"
+>Friends</Button>
+      </Box> 
+    </Box>
     )
 }
 export default InfoBar;

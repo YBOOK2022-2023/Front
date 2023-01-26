@@ -10,6 +10,7 @@
     "@mui/icons-material": "^5.10.16",
     "@mui/lab": "^5.0.0-alpha.115",
     "@mui/material": "^5.10.16",
+    "@mui/material-next": "^6.0.0-alpha.72",
     "@mui/styled-engine-sc": "^5.10.16",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
