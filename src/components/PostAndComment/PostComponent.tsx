@@ -18,7 +18,7 @@ import Comments from "./CommentsComponent";
 import { UserAccountContext } from "../../providers/UserAccount";
 import { configAxios } from "../../config/configAxios";
 
-export default function PostComponent(props: { post: Post }) {
+export default function PostComponent(props: { post: Post ,canLike:boolean}) {
   const styles = {
     media: {
       height: 0,
@@ -27,16 +27,20 @@ export default function PostComponent(props: { post: Post }) {
     },
   };
 
-  const { post } = props;
+  const { post,canLike } = props;
 
   const currentUser = {
     firstname: "Cyril",
     lastname: "Cauquil",
+    email: "",
     blocked: [],
     blockedBy: [],
     suscribedTo: [],
     suscribers: [],
     posts: [],
+    postsLiked: [],
+    postsCommented:[],
+    suscribersNum:1,
   };
 
   const [openComment, setOpenComment] = useState(false);
@@ -64,7 +68,17 @@ export default function PostComponent(props: { post: Post }) {
   };
 
   const { getJwt } = useContext(UserAccountContext);
-
+  const UpdateLike = () => {
+    //Permet de mettre à jour le liker un post
+      getJwt().then((token) => {
+        configAxios
+          .put("/posts/" + post.id + "/like", {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+          .then((result) => {
+          })
+    });
+  };
   const getComments = () => {
     getJwt().then((token) => {
       configAxios
@@ -93,7 +107,7 @@ export default function PostComponent(props: { post: Post }) {
           </Avatar>
         }
         title={post.author.firstname + " " + post.author.lastname}
-        subheader='September 14, 2016'
+        subheader={new Date(post.createdAt).toLocaleDateString('fr-FR',{year:'numeric',month:'long',day:'numeric'})}
       />
       <CardMedia
         style={styles.media}
@@ -101,17 +115,16 @@ export default function PostComponent(props: { post: Post }) {
       />
       <CardContent>
         <Typography variant='body2' color='text.secondary'>
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
+          {post.content}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton
+        {canLike && (<>can like</>)}
+       <IconButton
           aria-label='add to favorites'
           onClick={() => {
             setLiked(!liked);
-            getComments();
+            //getComments();
           }}
         >
           <FavoriteIcon color={liked ? "primary" : "action"} />

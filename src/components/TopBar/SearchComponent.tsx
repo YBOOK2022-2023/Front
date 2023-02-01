@@ -1,5 +1,6 @@
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
+import { green } from "@mui/material/colors";
 
 export const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -29,9 +30,10 @@ export const SearchIconWrapper = styled("div")(({ theme }) => ({
 export const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
+    background: green,
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
-    width: "50%",
+    width: "auto",
   },
 }));

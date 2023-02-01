@@ -8,6 +8,7 @@ import {
 import { UserPool } from "../hooks/Global/UserPool";
 import { resolve } from "path";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 type UserAccountContextType = {
   authenticate(
@@ -111,11 +112,14 @@ const UserAccountProvider: React.FC<{
       }
     );
   };
+   const navigate = useNavigate();
   const logout = () => {
     const user = UserPool.getCurrentUser();
+ 
     if (user) {
       user.signOut();
       console.log("logout");
+      navigate("/");
     }
   };
 

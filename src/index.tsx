@@ -12,7 +12,8 @@ import Settings from "./views/Settings";
 import { AccountBox } from "./views/login";
 import Notifications from "./views/Notifications";
 import Profile from "./views/Profile";
-
+import {useQueryClient,QueryClient,QueryClientProvider} from 'react-query'
+import {ReactQueryDevtools} from 'react-query/devtools'
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "/home",
+        path: "home",
         element: <Home />,
       },
       {
@@ -51,18 +52,27 @@ const router = createBrowserRouter([
     path: "/",
     element: <AccountBox />,
   },
+  {
+    path: "/friends",
+    element: <Friends />,
+  }
 ]);
-
+const queryClient = new QueryClient()
 root.render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  //<React.StrictMode>
+  
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <ReactQueryDevtools initialIsOpen={false} position='bottom-right' />     
+      </QueryClientProvider>
+  
+ // </React.StrictMode>
 );
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://cra.link/PWA
-serviceWorkerRegistration.unregister();
+serviceWorkerRegistration.register();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
