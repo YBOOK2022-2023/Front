@@ -59,14 +59,14 @@ const router = createBrowserRouter([
 ]);
 const queryClient = new QueryClient()
 root.render(
-  <React.StrictMode>
+  //<React.StrictMode>
   
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
         <ReactQueryDevtools initialIsOpen={false} position='bottom-right' />     
       </QueryClientProvider>
   
-  </React.StrictMode>
+ // </React.StrictMode>
 );
 
 // If you want your app to work offline and load faster, you can change

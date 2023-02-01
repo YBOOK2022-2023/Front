@@ -32,13 +32,7 @@ function CommentComponent(props: {
     suscribersNum:2,
   };
 
-  const postComment = () => {
-    post.comment.push({
-      author: currentUser,
-      content: comment,
-    });
-    setOpen(false);
-  };
+ 
 
   return (
     <Dialog open={open} onClose={() => setOpen(false)}>
@@ -61,8 +55,8 @@ function CommentComponent(props: {
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => setOpen(false)}>Cancel</Button>
-        <Button onClick={postComment}>Subscribe</Button>
+        <Button onClick={() => setOpen(false)}>Annuler</Button>
+        <Button variant="contained">Commenter</Button>
       </DialogActions>
     </Dialog>
   );

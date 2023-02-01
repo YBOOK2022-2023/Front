@@ -37,7 +37,6 @@ function Home() {
       id: 0,
       createdAt: "16 Janvier 2023 ",
       author: users[0],
-      comment: [],
       content: "wallpaper",
       likes: [],
   
@@ -47,7 +46,6 @@ function Home() {
       id: 1,
       createdAt: "20 Janvier 2023",
       author: users[1],
-      comment: [],
       content: "wallpaper",
       likes: [],
       attachments: [],

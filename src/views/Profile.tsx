@@ -2,7 +2,7 @@
 import Box from "@mui/material/Box";
 import Tabs from "../components/Tabs";
 import InfoBar from "../components/InfoBar";
-import { useCallback, useContext, useRef } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { configAxios } from "../config/configAxios";
 import { UserAccountContext } from "../providers/UserAccount";
 import { useQuery } from "react-query";
@@ -30,11 +30,12 @@ const commentedPost=useRef<Post[]>([]);
 const user=useRef<User>();
 const posted=useRef<Post[]>([]);
 const likedPost=useRef<Post[]>([]);
-
+    
     const { getJwt } = useContext(UserAccountContext);
-
+   
     const fetchProfilePosts = useCallback(async () => {
         const idToken = await getJwt();
+        console.log('idToken : ', idToken);
         return await configAxios.get('/postprofile', {
             headers: { Authorization: `Bearer ${idToken}` },
         }).then((response) => {
@@ -80,9 +81,10 @@ const likedPost=useRef<Post[]>([]);
             posts: profileData[0].user.posts,
             postsLiked: profileData[0].user.postsLiked,
             postsCommented: profileData[0].user.postComments,
-            suscribersNum: (profileData[0].user.fromFriendship.length + profileData[0].user.toFrienship.length),
+            suscribersNum: (profileData[0].friendcount),
         };
-
+        
+        
         profileData[0].posted.map((postData: {
             createdAt: string; id: number; user: User; postComments: []; htmlContent: string; postLikes: []; postAttachments: [];
         }) => {
@@ -91,12 +93,13 @@ const likedPost=useRef<Post[]>([]);
                     id: postData.id,
                     createdAt: postData.createdAt,
                     author: postData.user,
-                    comment: postData.postComments,
-                    content: postData.htmlContent,
+                    content:postData.htmlContent,
                     likes: postData.postLikes,
                     attachments: postData.postAttachments,
                 });
         });
+        console.log('Posted : ', posted.current);
+         
         profileData[0].likedPost.map((likedPostData: {
             createdAt: string; id: number; user: User; postComments: []; htmlContent: string; postLikes: []; postAttachments: [];
         }) => {
@@ -105,7 +108,6 @@ const likedPost=useRef<Post[]>([]);
                     id: likedPostData.id,
                     createdAt: likedPostData.createdAt,
                     author: likedPostData.user,
-                    comment: likedPostData.postComments,
                     content: likedPostData.htmlContent,
                     likes: likedPostData.postLikes,
                     attachments: likedPostData.postAttachments,
@@ -118,7 +120,6 @@ const likedPost=useRef<Post[]>([]);
                 id: commentedPostData.id,
                 createdAt: commentedPostData.createdAt,
                 author: commentedPostData.user,
-                comment: commentedPostData.postComments,
                 content: commentedPostData.htmlContent,
                 likes: commentedPostData.postLikes,
                 attachments: commentedPostData.postAttachments,
@@ -132,7 +133,7 @@ const likedPost=useRef<Post[]>([]);
 
         <div id='profile'>
 
-            < InfoBar userName={user.current?.lastname + ' ' + user.current?.firstname} numfriends={user.current?.suscribersNum} />
+            < InfoBar showButton={true} userName={user.current?.lastname + ' ' + user.current?.firstname} numfriends={user.current?.suscribersNum} />
             <Tabs title1="Post"
                 title2="Like"
                 title3="Comment"
@@ -154,7 +155,6 @@ const likedPost=useRef<Post[]>([]);
                         <PostComponent key={commentPost.id} post={commentPost} canLike={false} />
                     </div>
                 ))} />
-
 
         </div>
     );

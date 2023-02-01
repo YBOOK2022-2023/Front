@@ -4,8 +4,11 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
+import { useContext } from "react";
+import { UserAccountContext } from "../../providers/UserAccount";
 
 function TopBar() {
+  const { logout } = useContext(UserAccountContext)
   return (
     <div id='search-bar-custom' style={{ marginBottom: "56px" }}>
       <AppBar
@@ -35,10 +38,14 @@ function TopBar() {
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
-          <IconButton component={Link} to='notifications' color='inherit'>
-            <NotificationsIcon />
-            <LogoutRoundedIcon/>
-          </IconButton>
+          <div className="flex">
+            <IconButton component={Link} to='notifications' color='inherit'>
+              <NotificationsIcon />
+            </IconButton>
+            <IconButton color='inherit' onClick={logout}>
+              <LogoutRoundedIcon />
+            </IconButton>
+          </div>
         </Toolbar>
       </AppBar>
     </div>

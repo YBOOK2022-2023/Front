@@ -15,7 +15,6 @@ export default interface Post {
   content: string;
   author: User;
   likes: User[];
-  comment: Comment[];
   attachments: [];
 }
 
