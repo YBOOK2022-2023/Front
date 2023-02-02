@@ -17,7 +17,7 @@ import { Collapse } from "@mui/material";
 import Comments from "./CommentsComponent";
 import { UserAccountContext } from "../../providers/UserAccount";
 import { configAxios } from "../../config/configAxios";
-
+import parse from 'html-react-parser';
 export default function PostComponent(props: { post: Post; canLike: boolean }) {
   const styles = {
     media: {
@@ -117,7 +117,7 @@ export default function PostComponent(props: { post: Post; canLike: boolean }) {
       />
       <CardContent>
         <Typography variant='body2' color='text.secondary'>
-          {post.content}
+          {parse(post.content)}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
