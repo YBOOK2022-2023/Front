@@ -37,25 +37,25 @@ function Home() {
     },
   ];
 
-  const initPosts: Post[] = [
-    {
-      id: 0,
-      createdAt: "16 Janvier 2023 ",
-      author: users[0],
-      content: "wallpaper",
-      likes: [],
+  // const initPosts: Post[] = [
+  //   {
+  //     id: 0,
+  //     createdAt: "16 Janvier 2023 ",
+  //     author: users[0],
+  //     content: "wallpaper",
+  //     likes: [],
 
-      attachments: [],
-    },
-    {
-      id: 1,
-      createdAt: "20 Janvier 2023",
-      author: users[1],
-      content: "wallpaper",
-      likes: [],
-      attachments: [],
-    },
-  ];
+  //     attachments: [],
+  //   },
+  //   {
+  //     id: 1,
+  //     createdAt: "20 Janvier 2023",
+  //     author: users[1],
+  //     content: "wallpaper",
+  //     likes: [],
+  //     attachments: [],
+  //   },
+  // ];
 
   const posts = useRef<Post[]>([]);
   const postsLiked = useRef<Post[]>([]);
