@@ -116,54 +116,51 @@ function Home() {
       </Box>
     );
   let x = 0;
+
   if (postQuerySuccess) {
-    if (postsLiked.current.length < 3) {
-      postData[0].map(
-        (postData: {
-          createdAt: string;
-          id: number;
-          user: User;
-          htmlContent: string;
-          postAttachments: [];
-          postLikes: [];
-        }) => {
-          if (postsLiked.current.length < 3) {
-            postsLiked.current.push({
-              createdAt: postData.createdAt,
-              id: postData.id,
-              author: postData.user,
-              content: postData.htmlContent,
-              attachments: postData.postAttachments,
-              likes: postData.postLikes,
-              comment: null,
-            });
-          }
+    postData[0].map(
+      (postData: {
+        createdAt: string;
+        id: number;
+        user: User;
+        htmlContent: string;
+        postAttachments: [];
+        postLikes: [];
+      }) => {
+        if (postsLiked.current.length < 3) {
+          postsLiked.current.push({
+            createdAt: postData.createdAt,
+            id: postData.id,
+            author: postData.user,
+            content: postData.htmlContent,
+            attachments: postData.postAttachments,
+            likes: postData.postLikes,
+            comment: null,
+          });
         }
-      );
-      if (postsLiked.current.length < 3) {
-        postData[1].map(
-          (postData: {
-            createdAt: string;
-            id: number;
-            user: User;
-            postComments: [];
-            htmlContent: string;
-            postLikes: [];
-            postAttachments: [];
-          }) => {
-            posts.current.push({
-              createdAt: postData.createdAt,
-              id: postData.id,
-              author: postData.user,
-              content: postData.htmlContent,
-              attachments: postData.postAttachments,
-              likes: postData.postLikes,
-              comment: null,
-            });
-          }
-        );
       }
-    }
+    );
+    postData[1].map(
+      (postData: {
+        createdAt: string;
+        id: number;
+        user: User;
+        postComments: [];
+        htmlContent: string;
+        postLikes: [];
+        postAttachments: [];
+      }) => {
+        posts.current.push({
+          createdAt: postData.createdAt,
+          id: postData.id,
+          author: postData.user,
+          content: postData.htmlContent,
+          attachments: postData.postAttachments,
+          likes: postData.postLikes,
+          comment: null,
+        });
+      }
+    );
   } else if (postQueryError) {
     return <div>...Errror....</div>;
   }
@@ -180,7 +177,6 @@ function Home() {
               <PostComponent key={post.id} post={post} canLike={true} />
             </div>
           ))}
-          <Box>sbudrbvu</Box>
           {posts.current.map((post) => (
             <div>
               <PostComponent key={post.id} post={post} canLike={true} />
