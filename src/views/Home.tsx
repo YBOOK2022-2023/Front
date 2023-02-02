@@ -63,13 +63,47 @@ function Home() {
     },
   ];
 
-  // const initPosts: Post[] = [
-  //   {
-  //     id: 0,
-  //     createdAt: "16 Janvier 2023 ",
-  //     author: users[0],
-  //     content: "wallpaper",
-  //     likes: [],
+  /* const posts: Post[] = [
+    {
+      id: 0,
+      createdAt: "16 Janvier 2023 ",
+      author: users[0],
+      content: "wallpaper",
+      likes: [],
+  
+      attachments: [],
+    },
+    {
+      id: 1,
+      createdAt: "20 Janvier 2023",
+      author: users[1],
+      content: "wallpaper",
+      likes: [],
+      attachments: [],
+    },
+    {id: 2,
+      createdAt: "20 Janvier 2023",
+      author: users[2],
+      content: "wallpaper",
+      likes: [],
+      attachments: [],
+      },
+
+      {id: 3,
+        createdAt: "20 Janvier 2023",
+        author: users[1],
+        content: "wallpaper",
+        likes: [],
+        attachments: [],
+        },
+        {id: 4,
+          createdAt: "20 Janvier 2023",
+          author: users[3],
+          content: "wallpaper",
+          likes: [],
+          attachments: [],
+          },
+  ]; */
 
   //     attachments: [],
   //   },
