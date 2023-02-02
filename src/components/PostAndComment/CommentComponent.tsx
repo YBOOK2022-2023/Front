@@ -21,32 +21,26 @@ function CommentComponent(props: {
   const currentUser = {
     firstname: "Cyril",
     lastname: "Cauquil",
-    email:"",
+    email: "",
     blocked: [],
     blockedBy: [],
     suscribedTo: [],
     suscribers: [],
     posts: [],
     postsLiked: [],
-    postsCommented:[],
-    suscribersNum:2,
+    postsCommented: [],
+    suscribersNum: 2,
   };
-
- 
 
   return (
     <Dialog open={open} onClose={() => setOpen(false)}>
-      <DialogTitle>Subscribe</DialogTitle>
+      <DialogTitle>Commentaire</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          To subscribe to this website, please enter your email address here. We
-          will send updates occasionally.
-        </DialogContentText>
         <TextField
           autoFocus
           margin='dense'
           id='name'
-          label='Email Address'
+          label='Commentaire'
           type='email'
           fullWidth
           variant='standard'
@@ -56,7 +50,7 @@ function CommentComponent(props: {
       </DialogContent>
       <DialogActions>
         <Button onClick={() => setOpen(false)}>Annuler</Button>
-        <Button variant="contained">Commenter</Button>
+        <Button variant='contained'>Publier</Button>
       </DialogActions>
     </Dialog>
   );
