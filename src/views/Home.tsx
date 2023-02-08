@@ -1,5 +1,5 @@
 import { Box, CircularProgress } from "@mui/material";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import { useQuery } from "react-query";
 import PostComponent from "../components/PostAndComment/PostComponent";
 import { configAxios } from "../config/configAxios";
@@ -8,115 +8,6 @@ import User from "../models/UserModel";
 import { UserAccountContext } from "../providers/UserAccount";
 
 function Home() {
-  const users: User[] = [
-    {
-      firstname: "Cyril",
-      email: "",
-      lastname: "Cauquil",
-      blocked: [],
-      blockedBy: [],
-      suscribedTo: [],
-      suscribers: [],
-      posts: [],
-      postsLiked: [],
-      postsCommented: [],
-      suscribersNum: 2,
-    },
-    {
-      firstname: "Yanis",
-      lastname: "Bevia",
-      email: "",
-      blocked: [],
-      blockedBy: [],
-      suscribedTo: [],
-      suscribers: [],
-      posts: [],
-      postsLiked: [],
-      postsCommented: [],
-      suscribersNum: 2,
-    },
-    {
-      firstname: "Lionel",
-      lastname: "ABATAN",
-      email:"",
-      blocked: [],
-      blockedBy: [],
-      suscribedTo: [],
-      suscribers: [],
-      posts: [],
-      postsLiked: [],
-      postsCommented:[],
-      suscribersNum:2,
-    },
-    {
-      firstname: "Test",
-      lastname: "Lastname",
-      email:"",
-      blocked: [],
-      blockedBy: [],
-      suscribedTo: [],
-      suscribers: [],
-      posts: [],
-      postsLiked: [],
-      postsCommented:[],
-      suscribersNum:2,
-    },
-  ];
-
-  /* const posts: Post[] = [
-    {
-      id: 0,
-      createdAt: "16 Janvier 2023 ",
-      author: users[0],
-      content: "wallpaper",
-      likes: [],
-  
-      attachments: [],
-    },
-    {
-      id: 1,
-      createdAt: "20 Janvier 2023",
-      author: users[1],
-      content: "wallpaper",
-      likes: [],
-      attachments: [],
-    },
-    {id: 2,
-      createdAt: "20 Janvier 2023",
-      author: users[2],
-      content: "wallpaper",
-      likes: [],
-      attachments: [],
-      },
-
-      {id: 3,
-        createdAt: "20 Janvier 2023",
-        author: users[1],
-        content: "wallpaper",
-        likes: [],
-        attachments: [],
-        },
-        {id: 4,
-          createdAt: "20 Janvier 2023",
-          author: users[3],
-          content: "wallpaper",
-          likes: [],
-          attachments: [],
-          },
-  ]; */
-
-  //     attachments: [],
-  //   },
-  //   {
-  //     id: 1,
-  //     createdAt: "20 Janvier 2023",
-  //     author: users[1],
-  //     content: "wallpaper",
-  //     likes: [],
-  //     attachments: [],
-  //   },
-  // ];
-
   const posts = useRef<Post[]>([]);
   const postsLiked = useRef<Post[]>([]);
   const { getJwt } = useContext(UserAccountContext);
@@ -149,7 +40,6 @@ function Home() {
         <CircularProgress />
       </Box>
     );
-  let x = 0;
 
   if (postQuerySuccess) {
     postData[0].map(
@@ -198,9 +88,6 @@ function Home() {
   } else if (postQueryError) {
     return <div>...Errror....</div>;
   }
-
-  // users[0].posts.push(posts[0]);
-  // users[1].posts.push(posts[1]);
 
   return (
     <div id='home-page' style={{ backgroundColor: "inherit", height: "100%" }}>

@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Tabs from "../components/Tabs";
 import InfoBar from "../components/InfoBar";
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useRef } from "react";
 import { configAxios } from "../config/configAxios";
 import { UserAccountContext } from "../providers/UserAccount";
 import { useQuery } from "react-query";
@@ -12,7 +12,6 @@ import CommentIcon from "@mui/icons-material/Comment";
 import LocalPostOfficeIcon from "@mui/icons-material/LocalPostOffice";
 import PostComponent from "../components/PostAndComment/PostComponent";
 import CircularProgress from "@mui/material/CircularProgress";
-import Button from "@mui/material-next/Button";
 
 //import {fetchPosts} from "../services/apiServicePost";
 

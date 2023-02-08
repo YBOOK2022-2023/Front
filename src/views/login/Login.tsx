@@ -12,16 +12,10 @@ import {
 } from "./common";
 import HighlightOffTwoToneIcon from "@mui/icons-material/HighlightOffTwoTone";
 import { AccountContext } from "../../hooks/context/LoginContext";
-import { useForm, Resolver } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
-import { UserPool } from "../../hooks/Global/UserPool";
-import {
-  UserAccountProvider,
-  UserAccountContext,
-} from "../../providers/UserAccount";
-import { render } from "@testing-library/react";
+import { UserAccountContext } from "../../providers/UserAccount";
 import { useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
@@ -29,7 +23,7 @@ const schema = yup.object().shape({
   password: yup
     .string()
     .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})/,
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{6,})/,
       " Au moins 6 Caratères,1 majuscule,1 minuscule, 1 chiffre et 1 caractère spécial"
     )
     .required("Veuillez saisir un mot de passe"),
@@ -53,8 +47,6 @@ export function LoginForm(props: any) {
     resolver: yupResolver(schema),
   });
   //****hooks
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
   const [isError, setIsError] = React.useState(true);
   const [openToast, setOpenToast] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState("");
@@ -63,9 +55,6 @@ export function LoginForm(props: any) {
   const { getSession } = useContext(UserAccountContext);
   const navigate = useNavigate();
   const onSubmit = (data: MyFieldsLogin) => {
-    setEmail(data.email);
-    setPassword(data.password);
-
     authenticate(data.email, data.password)
       .then((data) => {
         console.log("data:", data);

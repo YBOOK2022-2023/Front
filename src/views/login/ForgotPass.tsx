@@ -1,13 +1,11 @@
-import React, { useState, useContext, useEffect } from "react";
-import { UserAccountProvider } from "../../providers/UserAccount";
-import Button from "@mui/material/Button";
+import React, { useContext } from "react";
 import HighlightOffTwoToneIcon from "@mui/icons-material/HighlightOffTwoTone";
 import { UserPool } from "../../hooks/Global/UserPool";
-import { useForm, Resolver } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { AccountContext } from "../../hooks/context/LoginContext";
-import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
+import { CognitoUser } from "amazon-cognito-identity-js";
 import {
   BoldLink,
   BoxContainer,
@@ -17,7 +15,6 @@ import {
   SpanAlert,
   SubmitButton,
 } from "./common";
-import AlertToast from "../../components/Toast";
 import ValidationCodeDialog from "../../components/Login/Modal";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
@@ -47,7 +44,7 @@ interface MyFieldsForgottenPass {
 }
 
 export function ForgotPass(props: any) {
-  const { switchToLogin, switchToForgotPassword } = useContext(AccountContext);
+  const { switchToLogin } = useContext(AccountContext);
 
   const {
     register,
@@ -261,8 +258,4 @@ export function ForgotPass(props: any) {
       </MutedLink>
     </BoxContainer>
   );
-}
-
-function setOpenToastComfirm(arg0: boolean) {
-  throw new Error("Function not implemented.");
 }

@@ -62,7 +62,6 @@ export function RegisterForm(props: any) {
   const { switchToLogin, switchToForgotPassword } = useContext(AccountContext);
   //***hooks
   const { authenticate } = useContext(UserAccountContext);
-  const { getSession } = useContext(UserAccountContext);
   const [isError, setisError] = useState(false);
   const [name] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -111,7 +110,7 @@ export function RegisterForm(props: any) {
       Pool: UserPool,
     };
     const cognitoUser = new CognitoUser(userData);
-   
+
     async function postDataRegister(data: any) {
       try {
         const response = await configAxios.post("/user", undefined, {
@@ -122,7 +121,7 @@ export function RegisterForm(props: any) {
         console.error(error);
       }
     }
-    
+
     cognitoUser.confirmRegistration(code, true, function (err, result) {
       if (result === "SUCCESS") {
         const toast_success = "Votre compte a été créé avec succès";

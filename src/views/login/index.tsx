@@ -6,7 +6,6 @@ import { LoginForm } from "./Login";
 import { RegisterForm } from "./Register";
 import { AccountContext } from "../../hooks/context/LoginContext";
 import { UserAccountProvider } from "../../providers/UserAccount";
-import Status from "../../hooks/context/UseLoggedStatus";
 import { ForgotPass } from "./ForgotPass";
 
 const BoxContainer = styled.div`
@@ -28,9 +27,6 @@ const TopContainer = styled.div`
   padding: 0 1.8em;
   padding-bottom: 5em;
 `;
-type ElementProps = {
-  children: React.ReactNode;
-};
 
 const BackDrop = styled(motion.div)`
   width: 160%;

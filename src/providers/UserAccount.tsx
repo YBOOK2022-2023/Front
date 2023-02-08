@@ -1,13 +1,10 @@
 import React, { createContext } from "react";
 import {
-  CognitoUserPool,
   AuthenticationDetails,
   CognitoUser,
   CognitoUserSession,
 } from "amazon-cognito-identity-js";
 import { UserPool } from "../hooks/Global/UserPool";
-import { resolve } from "path";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 type UserAccountContextType = {
@@ -69,22 +66,22 @@ const UserAccountProvider: React.FC<{
     });
   };
 
-  async function postToken(route: string, token: string) {
-    try {
-      const response = await fetch(route, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ token }),
-      });
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  // async function postToken(route: string, token: string) {
+  //   try {
+  //     const response = await fetch(route, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //       body: JSON.stringify({ token }),
+  //     });
+  //     const data = await response.json();
+  //     console.log(data);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
 
   const authenticate = async (Username: string, Password: string) => {
     return await new Promise<{ data: CognitoUserSession }>(
