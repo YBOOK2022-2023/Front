@@ -19,13 +19,14 @@ Voici les fonctionnalités principales implémentées:
 
 ## Tester l'application
 
-1. Installer les dépendances:
+1. Lancer le backend (se référer au README du repo correspondant)
+2. Installer les dépendances:
 
 ```
 npm install
 ```
 
-2. Lancer l'application en local:
+3. Lancer l'application en local:
 
 ```
 npm start
@@ -35,5 +36,7 @@ npm start
 
 Si une erreur survient lors de l'inscription, il est possible de se connecter avec ces identifiants:
 
-- email: tekivag100@tohup.com
+- email: gamov50941@unicsite.com
 - mdp: Test123!
+
+(identifiants utilisés lors du développement de l'app)

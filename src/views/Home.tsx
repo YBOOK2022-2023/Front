@@ -95,12 +95,20 @@ function Home() {
         <div>
           {postsLiked.current.map((post) => (
             <div>
-              <PostComponent key={post.id} post={post} canLike={true} />
+              {post.author ? (
+                <PostComponent key={post.id} post={post} canLike={true} />
+              ) : (
+                <></>
+              )}
             </div>
           ))}
           {posts.current.map((post) => (
             <div>
-              <PostComponent key={post.id} post={post} canLike={true} />
+              {post.author ? (
+                <PostComponent key={post.id} post={post} canLike={true} />
+              ) : (
+                <></>
+              )}
             </div>
           ))}
         </div>
